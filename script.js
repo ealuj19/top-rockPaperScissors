@@ -5,7 +5,16 @@ Make a function that will return the computer's choice (Rock, Paper, or Scissors
     If the variable is 34-66 return Paper
     If the variable is 67-99 (else) return Scissors
 */
-
+function getComputerChoice () {
+    let compChoice = Math.floor(Math.random() * 100);
+    if (compChoice >= 0 && compChoice <= 33) {
+        return "Rock";
+    } if (compChoice >= 34 && compChoice <= 66) {
+        return "Paper";
+    } else {
+        return "Scissors";
+    }
+}
 /*
 Create a variable that accepts a string input from user
 Create a function that takes the user input and returns the first letter capitalized
