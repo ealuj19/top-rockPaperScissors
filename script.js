@@ -1,10 +1,4 @@
-/*  
-Make a function that will return the computer's choice (Rock, Paper, or Scissors)
-    Declare a variable that will contain a randomly generated number 0-99
-    If the variable is 0-33 return Rock
-    If the variable is 34-66 return Paper
-    If the variable is 67-99 (else) return Scissors
-*/
+//  Function that will return the computer's choice (Rock, Paper, or Scissors)
 function computerSelection () {
     let compChoice = Math.floor(Math.random() * 100);
     if (compChoice >= 0 && compChoice <= 33) {
@@ -15,35 +9,21 @@ function computerSelection () {
         return "Scissors";
     }
 }
-/*
-Create a variable that accepts a string input from user
-Create a function that takes the user input and returns the first letter capitalized
-    Take first character of the string and capitalize it
-    Take remainder of string and make lowercase
-    Return the new string
-*/
+
+// Function that returns only the first letter capitalized
 function firstLetterUpper (str) {
     capitalizedString = str.substr(0, 1).toUpperCase() + str.substr(1).toLowerCase();
     return capitalizedString;
 }
 
+// Function that takes user move and returns only first letter capitalized
 function playerSelection () {
     let userChoice = prompt("Rock, Paper, Scissors...")
     userChoice = firstLetterUpper(userChoice);
     return userChoice;
 }
-/*
-Create a function that takes the computer's choice and user's choice as parameters
-    If user's choice is Rock
-        If computer's choice is Scissors return "You win!"
-        Else, return "You lose!"
-    If User's choice is Paper
-        If computer's choice is Rock return "You win!"
-        Else, return "You lose!"
-    Else (User's choice is Scissors)
-        If computer's choice is Paper return "You win!"
-        Else, return "You lose!"
-*/
+
+// Function that plays a single round of Rock, Paper, Scissors
 function playRound (computerSelection, playerSelection) {
     let roundResult;
     if (playerSelection === "Rock") {
@@ -78,4 +58,33 @@ function playRound (computerSelection, playerSelection) {
     }
 }
 
-console.log(playRound(computerSelection(), playerSelection()));
+// Function that plays a Rock, Paper, Scissors game of best to 5
+function game() {
+    let userScore = 0
+    let computerScore = 0
+    for (let i = 0; i < 5; i++) {
+        let roundOutcome = playRound(computerSelection(), playerSelection());
+        if (roundOutcome == "You win!") {
+            userScore += 1;
+            if (userScore === 3) {
+                console.log("You won the game!");
+                break;
+            } else {
+                console.log(roundOutcome + ` You ${userScore} : Computer ${computerScore}`);
+            }
+        } else if (roundOutcome == "You lose!") {
+            computerScore += 1;
+            if (computerScore === 3) {
+                console.log("The computer won the game!");
+                break;
+            } else {
+                console.log(roundOutcome + ` You ${userScore} : Computer ${computerScore}`);
+            }
+        } else {
+            i -= 1;
+            console.log(roundOutcome + ` The score is still: You ${userScore} : Computer ${computerScore}`)
+        }
+    }
+}
+
+game();
